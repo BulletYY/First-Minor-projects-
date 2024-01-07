@@ -1,6 +1,6 @@
 import requests
 import json
-import credentials ## its bascially a header 
+import credentials ## its bascially my apiHeader
 
 
 
