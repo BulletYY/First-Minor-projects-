@@ -42,5 +42,8 @@ On clicking the "Submit" button, the app fetches historical stock data for the s
 Daily returns are calculated, and PCA is applied using the sklearn.decomposition.PCA module.
 The app generates two graphs - a bar chart showing explained variance by each component and a line chart showing cumulative explained variance.
 
-                                                                                                        second one "catsystem3"
+                                                                                                        
+                                                                                                        
+                                                                                                #second one "catsystem3
+Its a basic implementation of api and using typical Methods like delete,post,get to get,send or delte a cat which conatins id,url,data etc 
                                                                                                         
