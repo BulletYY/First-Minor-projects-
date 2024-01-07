@@ -47,4 +47,32 @@ The app generates two graphs - a bar chart showing explained variance by each co
 # second one "catsystem3
 
 Its a basic implementation of api and using typical Methods like delete,post,get to get,send or delte a cat which conatins id,url,data etc 
+MORE INFO WILL BE SOON PROVIDED
+
+# Cwiczenia.py 
+ChessGame Class:
+
+The ChessGame class represents the state and logic of a simple chess game.
+It has an __init__ method that initializes the chessboard with the starting position of pieces and sets the current player to 'white'.
+The print_board method prints the current state of the chessboard.
+The is_valid_move method checks whether a move from the specified starting position to the ending position is valid. It currently allows any non-capturing move, and it checks if the piece belongs to the current player.
+The play method is the main game loop. It continuously prints the board, prompts the current player for a move, and updates the board if the move is valid.
+Chessboard Representation:
+
+The chessboard is represented as a list of lists (self.board). Each sublist represents a row, and each element within the sublist represents a square on the chessboard. Pieces are represented by single characters: 'P' for pawn, 'R' for rook, 'N' for knight, 'B' for bishop, 'Q' for queen, and 'K' for king. Lowercase letters represent black pieces, and uppercase letters represent white pieces.
+Game Execution:
+
+The script creates an instance of the ChessGame class (game = ChessGame()) and starts the game by calling the play method (game.play()).
+User Interaction:
+
+During each turn, the current state of the chessboard is printed, and the player is prompted to enter the starting and ending positions for their move.
+Move Execution:
+
+If the entered move is valid (according to the basic rules in the is_valid_move method), the board is updated, and the current player is switched for the next turn.
+If the move is not valid, an error message is displayed, and the player is prompted to try again.
+Game Loop:
+
+The game continues in a loop, allowing players to take turns until interrupted externally (e.g., manually stopping the script).
+
+!!It's worth noting that the current code provides a basic framework for a chess game but lacks specific rules for different pieces' movements and capturing. 
                                                                                                         
