@@ -75,4 +75,32 @@ Game Loop:
 The game continues in a loop, allowing players to take turns until interrupted externally (e.g., manually stopping the script).
 
 !!It's worth noting that the current code provides a basic framework for a chess game but lacks specific rules for different pieces' movements and capturing. 
-                                                                                                        
+
+# game 
+Enum Definitions:
+game_prob: Enum representing possible outcomes of the first roll - "Chest" or "Empty."
+Colours: Enum representing different chest colors - Green, Orange, Purple, and Gold.
+Probability Distributions:
+
+first_roll: Dictionary mapping the outcomes of the first roll to their probabilities.
+chestColoursDictionary: Dictionary mapping chest colors to their probabilities for the second roll.
+gold_reward: Dictionary calculating gold rewards based on the chest colors.
+Game Mechanics:
+
+The game has a fixed length (game_length set to 5).
+Player is prompted to move forward ("Yes" or any case variation) in a loop.
+For each move:
+A random outcome (game_event) is determined for the first roll.
+If a chest is obtained:
+A chest color is randomly chosen for the second roll.
+Gold reward is calculated based on the chosen color using the gold_reward dictionary.
+A random gold gain within a certain percentage range is calculated using gain_gold_approx function.
+The total gold (gold_aqq) is updated, and the result is printed.
+If no chest is obtained, a message is printed indicating no reward.
+The loop continues until the game_length reaches 0.
+
+Utility Functions:
+gain_gold_approx: A function to calculate a random gold value within a given percentage range.
+
+Print Statements:
+Various print statements provide information about the game's progress and outcomes.
