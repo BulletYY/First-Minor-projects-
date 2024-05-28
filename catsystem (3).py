@@ -1,83 +1,65 @@
 import requests
 import json
-import credentials ## its bascially my apiHeader
-
-
+import credentials  # Importing API headers
 
 def get_json_content_from_response(response):
     try:
-       content = response.json()
+        content = response.json()
     except json.decoder.JSONDecodeError:
-       print("Niepoprawny format", response.text)
+        print(f"Invalid format: {response.text}")
     else:
-       return content
-    
+        return content
 
-def get_favourite_cats(userId):
+def get_favourite_cats(user_id):
     params = {
-        "sub_id" : userId
+        "sub_id": user_id
     }
-    r = requests.get('https://api.thecatapi.com/v1/favourites/', params,
-                 headers=credentials.headers)
-    
-    return get_json_content_from_response(r)
+    response = requests.get('https://api.thecatapi.com/v1/favourites/', params=params, headers=credentials.headers)
+    return get_json_content_from_response(response)
 
 def get_random_cat():
-    r = requests.get('https://api.thecatapi.com/v1/images/search',
-                 headers=credentials.headers)
-    
-    return get_json_content_from_response(r)[0]
+    response = requests.get('https://api.thecatapi.com/v1/images/search', headers=credentials.headers)
+    return get_json_content_from_response(response)[0]
 
-def add_favourite_cat(catId, userId):
-    catData = {
-        "image_id" : catId,
-        "sub_id" : userId
-        }
+def add_favourite_cat(cat_id, user_id):
+    cat_data = {
+        "image_id": cat_id,
+        "sub_id": user_id
+    }
+    response = requests.post('https://api.thecatapi.com/v1/favourites/', json=cat_data, headers=credentials.headers)
+    return get_json_content_from_response(response)
 
-    r = requests.post('https://api.thecatapi.com/v1/favourites/', json = catData, 
-                 headers=credentials.headers)
-    
-    return get_json_content_from_response(r)
+def remove_favourite_cat(favourite_cat_id):
+    response = requests.delete(f'https://api.thecatapi.com/v1/favourites/{favourite_cat_id}', headers=credentials.headers)
+    return get_json_content_from_response(response)
 
-def remove_favourite_cat(userId, favouriteCatId):
-    r = requests.delete('https://api.thecatapi.com/v1/favourites/'+favouriteCatId, 
-                 headers=credentials.headers)
-    
-    return get_json_content_from_response(r)    
-    
-
-print("Hej, zaloguj się - podaj login i hasło")
-#pobranie loginu i hasla
-#sprawdzamy czy login i haslo jest poprawne
-#logowanie zaszlo poprawnie
-#pobieramy z bazy danych userId i name - nazwe użytkownika
-
-userId = "agh2m"
+print("Hello, please log in by providing your username and password.")
+# Assuming successful login and retrieval of user ID and name from the database
+user_id = "agh2m"
 name = "Arkadiusz"
 
-print("Witaj " + name)
-favouriteCats = get_favourite_cats(userId)
-print("Twoje ulubione kotki to ", favouriteCats)
-randomCat = get_random_cat()
-print("Wylosowano kotka: ", randomCat["url"])
+print(f"Welcome, {name}.")
+favourite_cats = get_favourite_cats(user_id)
+print(f"Your favourite cats are: {favourite_cats}")
+random_cat = get_random_cat()
+print(f"A random cat has been selected: {random_cat['url']}")
 
-addToFavourites = input("Czy chcesz go dodać do ulubionych? T/N ")
-newlyAddedCatInfo = {}
-if(addToFavourites.upper() == "T"):
-    resultFromAddingFavouriteCat = add_favourite_cat(randomCat["id"], userId)
-    newlyAddedCatInfo = {resultFromAddingFavouriteCat["id"] : randomCat["url"]}
+add_to_favourites = input("Would you like to add this cat to your favourites? (Y/N) ").strip().upper()
+newly_added_cat_info = {}
+if add_to_favourites == "Y":
+    result_from_adding_favourite_cat = add_favourite_cat(random_cat["id"], user_id)
+    newly_added_cat_info = {result_from_adding_favourite_cat["id"]: random_cat["url"]}
 else:
-    print("No to lipa, kotek będzie smutny :(")
+    print("That's unfortunate, the cat will be sad.")
 
-favouriteCatsById = {
-    favouriteCat["id"] : favouriteCat["image"]["url"]                            
-    for favouriteCat in favouriteCats
+favourite_cats_by_id = {
+    favourite_cat["id"]: favourite_cat["image"]["url"]
+    for favourite_cat in favourite_cats
 }
-favouriteCatsById.update(newlyAddedCatInfo)
+favourite_cats_by_id.update(newly_added_cat_info)
 
-print(favouriteCatsById)
+print(f"Updated list of favourite cats: {favourite_cats_by_id}")
 
-favouriteCatId = input("Czy nie masz serca i chcesz usunąć kotka z ulubionych? Podaj jego id: ")
+favourite_cat_id = input("Do you want to remove a cat from your favourites? Please provide its ID: ")
 
-
-print(remove_favourite_cat(userId, favouriteCatId))
+print(f"{remove_favourite_cat(favourite_cat_id)}")
