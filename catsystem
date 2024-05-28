@@ -36,7 +36,7 @@ def remove_favourite_cat(favourite_cat_id):
 print("Hello, please log in by providing your username and password.")
 # Assuming successful login and retrieval of user ID and name from the database
 user_id = "agh2m"
-name = "Arkadiusz"
+name = "QUANTUS"
 
 print(f"Welcome, {name}.")
 favourite_cats = get_favourite_cats(user_id)
