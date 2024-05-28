@@ -1,3 +1,2 @@
-Couple of projects Done 
-
-Soon it will be described more precisely
+Couple of minor projects Done  
+Soon it will be described more precisely.
