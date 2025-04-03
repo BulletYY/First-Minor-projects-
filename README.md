@@ -1,6 +1,5 @@
-Couple of minor projects.
-
-Soon it will be described  precisely.
-
-The main goal of those projects was to show my knowledge of basics packages and syntax of python.
+Mostly here I’m focused on econometrics—working through applied problems, 
+brushing up on core concepts, and testing out different modeling approaches. 
+Sometimes it’s just small experiments or replications, other times I’m digging into datasets to explore causal inference or time series stuff.
+Keeping it hands-on and practical.
 
